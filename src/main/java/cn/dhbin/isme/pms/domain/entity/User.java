@@ -11,14 +11,19 @@ import java.time.LocalDateTime;
 @Data
 @TableName("\"USER\"")
 public class User {
+
     @TableId(type = IdType.AUTO)
     private  Long id;
 
     private String username;
+
     private String password;
+
     private Boolean enable;
+
     @TableField("createTime")
     private LocalDateTime createTime;
+
     @TableField("createTime")
     private LocalDateTime updateTime;
 }
