@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 @Mapper
-public interface HiSrvOrgMapper {
+public interface HiSrvOrgMapper{
 //    List<SrvOrgResponse> getSrvOrgByCode(SrvOrgRequest srvOrgRequest);
 
     List<Map<String,Object>> getBdSrvByCode(@Param("itemCodeReq")String itemCodeReq,@Param("beginNum")Integer beginNum,@Param("endNum")Integer endNum);

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.dhbin.isme.pms.mapper.HiSrvOrgMapper">
+    <select id="getBdSrvByCode" resultType="java.util.Map">
+        SELECT * FROM  hi_bd_srv
+        where
+        fg_active = '1' and (SD_SRVTP_CD LIKE '21%' OR SD_SRVTP_CD LIKE '22%')
+        <if test="itemCodeReq!=null and itemCodeReq!=''">
+            and cd = #{itemCodeReq}
+        </if>
+        <if test="endNum!=0 and beginNum &lt;= endNum">
+            and rownum between #{beginNum} and #{endNum}
+        </if>
+    </select>
+
+    <select id="getBdSrvByName" resultType="java.util.Map">
+        SELECT * FROM hi_bd_srv a
+        where
+        fg_active = '1' and (SD_SRVTP_CD LIKE '21%' OR SD_SRVTP_CD LIKE '22%')
+        <if test="itemNameReq!=null and itemNameReq!=''">
+            and na like #{itemNameReq}
+        </if>
+        <if test="endNum!='0' and beginNum &lt;= endNum">
+            and rownum between #{beginNum} and #{endNum}
+        </if>
+
+    </select>
+
+    <select id="getBdSrvDetail" resultType="java.util.Map">
+        SELECT a.* FROM ( SELECT x2.ID_SRV_SET ID_SRV, X3.CD ItemCode, X3.NA ItemName, x4.pri Price, x2.VAL_UNITMED Num,x3.UNIT_SRV_MED Unit
+                          FROM HI_BD_SRV_SET  x2, hi_bd_srv x3 ,HI_BD_SRVPRI x4
+                          WHERE x2.id_srv  = x3.id_srv  and x2.id_srv= x4.id_srv) a
+        where a.id_srv = #{itemCode}
+    </select>
+
+</mapper>

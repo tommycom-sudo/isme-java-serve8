@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @SpringBootTest
 class IsmeJavaServe8ApplicationTests {
@@ -23,6 +25,8 @@ class IsmeJavaServe8ApplicationTests {
     public void testSelect() {
         System.out.println(("----- selectAll method test ------"));
         List<User> userList = userMapper.selectList(null);
+        List<Map<String,Object>> mapList = new ArrayList<>();
+        mapList = userMapper.getUserList();
 
         Assert.isTrue(1 == userList.size(), "");
         userList.forEach(System.out::println);
