@@ -15,4 +15,6 @@ public interface HiSrvOrgMapper{
     List<Map<String,Object>> getBdSrvByName(@Param("itemNameReq")String itemNameReq,@Param("beginNum")Integer beginNum,@Param("endNum")Integer endNum);
 
     List<Map<String,Object>> getBdSrvDetail(@Param("itemCode")String itemCode);
+
+
 }

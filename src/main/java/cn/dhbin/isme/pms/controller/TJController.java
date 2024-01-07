@@ -3,6 +3,7 @@ import cn.dhbin.isme.pms.mapper.HiSrvOrgMapper;
 import cn.dhbin.isme.pms.domain.dto.SrvOrgDetail;
 import cn.dhbin.isme.pms.domain.dto.SrvOrgResponse;
 import cn.dhbin.isme.pms.domain.request.SrvOrgRequest;
+import cn.dhbin.isme.pms.mapper.HiSrvOrgMapperV2;
 import cn.hutool.core.util.ObjectUtil;
 //import com.baomidou.mybatisplus.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
@@ -26,20 +27,26 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Component
 public class TJController {
-    @PostMapping("/getSrvDetail1")
+    @PostMapping("/getSrvDetail")
     @MetricTime("getSrvDetail1")
-    public List<SrvOrgResponse> getSrvDetail1(@RequestBody @Validated SrvOrgRequest req){
-//        SrvOrgResponse  res  = new SrvOrgResponse();
-//        res.setItem("2222");
-//        res.setText("bbbbb");
-        return getOrgSrv1(req);
+    public List<SrvOrgResponse> getSrvDetail(@RequestBody @Validated SrvOrgRequest req){
+
+        return getOrgSrv(req);
+
+    }
+
+    @PostMapping("/getSrvDetailV2")
+    @MetricTime("getSrvDetailv2")
+    public List<SrvOrgResponse> getSrvDetailv2(@RequestBody @Validated SrvOrgRequest req){
+
+        return getOrgSrv2(req);
 
     }
     @Autowired
 
     private HiSrvOrgMapper hiSrvOrgMapper;
 
-    public List<SrvOrgResponse> getOrgSrv1(SrvOrgRequest srvOrgRequest){
+    public List<SrvOrgResponse> getOrgSrv(SrvOrgRequest srvOrgRequest){
         List<SrvOrgResponse> list = new ArrayList<>();
         Map<String,SrvOrgResponse> responseMap = new HashMap<>();
         Map<String, SrvOrgDetail> responseDetMap = new HashMap<>();
@@ -87,5 +94,22 @@ public class TJController {
             }
         }
         return list;
+    }
+    @Autowired
+    private HiSrvOrgMapperV2 hiSrvOrgMapperV2;
+
+    public List<SrvOrgResponse> getOrgSrv2(SrvOrgRequest srvOrgRequest){
+        String itemCodeReq = srvOrgRequest.getItemCode();
+        String itemNameReq = ObjectUtil.isEmpty(srvOrgRequest.getItemName())?"":srvOrgRequest.getItemName() + "%";
+        Integer currentPageReq = ObjectUtil.isEmpty(srvOrgRequest.getCurrentPage())?0:srvOrgRequest.getCurrentPage();
+        Integer limitReq = ObjectUtil.isEmpty(srvOrgRequest.getLimit())?-1:srvOrgRequest.getLimit();
+        Integer beginNum = (currentPageReq == 1 || currentPageReq==0)?1:(currentPageReq - 1) * (limitReq + 1);
+        Integer endNum =  currentPageReq * limitReq;
+        List<SrvOrgResponse> mapList = new ArrayList<>();
+        if (StringUtils.isNotEmpty(itemCodeReq)&&!"".equals(itemCodeReq)){
+            mapList = hiSrvOrgMapperV2.getBdSrvByCodeV2(itemCodeReq,beginNum,endNum);
+
+        }
+        return mapList;
     }
 }

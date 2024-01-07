@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.dhbin.isme.pms.mapper.HiSrvOrgMapperV2">
+
+    <resultMap id="SrvOrgResult" type="cn.dhbin.isme.pms.domain.dto.SrvOrgResponse">
+        <id property="item" column="item"/>
+        <result property="item" column="item"/>
+        <result property="text" column="text"/>
+        <collection property="srvOrgDetails"  resultMap="detailResult"
+                    ofType="cn.dhbin.isme.pms.domain.dto.SrvOrgDetail"
+                   />
+    </resultMap>
+    <resultMap id="detailResult" type="cn.dhbin.isme.pms.domain.dto.SrvOrgDetail">
+        <id property="itemCode" column="itemcode"/>
+        <result property="itemCode" column="itemcode"/>
+        <result property="itemName" column="itemname"/>
+        <result property="price" column="price"/>
+        <result property="num" column="num"/>
+        <result property="unit" column="unit"/>
+    </resultMap>
+    <select id="getBdSrvByCodeV2" resultMap="SrvOrgResult">
+        SELECT x1.cd item , x1.na text,  x2.* FROM hi_bd_srv  x1
+            LEFT JOIN  (SELECT x2.id detail_id, x2.ID_SRV_SET , X3.CD ItemCode , X3.NA ItemName , x4.pri price ,x2.VAL_UNITMED num,x3.UNIT_SRV_MED unit
+            FROM HI_BD_SRV_SET  x2, hi_bd_srv x3 ,HI_BD_SRVPRI x4
+            WHERE x2.id_srv  = x3.id_srv  and x2.id_srv= x4.id_srv )
+         x2 ON x1.ID_SRV  = x2.ID_SRV_SET
+        WHERE x1.cd = '101'  and x1.FG_ACTIVE = '1' and  (SD_SRVTP_CD LIKE '21%' OR SD_SRVTP_CD LIKE '22%')
+
+    </select>
+
+
+</mapper>
