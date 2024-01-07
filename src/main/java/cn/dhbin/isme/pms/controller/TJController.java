@@ -7,7 +7,10 @@ import cn.hutool.core.util.ObjectUtil;
 //import com.baomidou.mybatisplus.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import lombok.RequiredArgsConstructor;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,18 +24,22 @@ import java.util.Map;
 @RestController
 @RequestMapping("/tj")
 @RequiredArgsConstructor
+@Component
 public class TJController {
     @PostMapping("/getSrvDetail1")
+    @MetricTime("getSrvDetail1")
     public List<SrvOrgResponse> getSrvDetail1(@RequestBody @Validated SrvOrgRequest req){
 //        SrvOrgResponse  res  = new SrvOrgResponse();
 //        res.setItem("2222");
 //        res.setText("bbbbb");
-        return getOrgSrv(req);
+        return getOrgSrv1(req);
 
     }
     @Autowired
+
     private HiSrvOrgMapper hiSrvOrgMapper;
-    public List<SrvOrgResponse> getOrgSrv(SrvOrgRequest srvOrgRequest){
+
+    public List<SrvOrgResponse> getOrgSrv1(SrvOrgRequest srvOrgRequest){
         List<SrvOrgResponse> list = new ArrayList<>();
         Map<String,SrvOrgResponse> responseMap = new HashMap<>();
         Map<String, SrvOrgDetail> responseDetMap = new HashMap<>();

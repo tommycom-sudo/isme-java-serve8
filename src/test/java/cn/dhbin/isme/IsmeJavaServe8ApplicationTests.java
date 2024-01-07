@@ -6,6 +6,7 @@ import cn.dhbin.isme.pms.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import org.springframework.util.Assert;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @SpringBootTest
+
 class IsmeJavaServe8ApplicationTests {
 
     @Test
