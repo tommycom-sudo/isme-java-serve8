@@ -43,73 +43,33 @@ public class TJController {
 
     }
     @Autowired
-
     private HiSrvOrgMapper hiSrvOrgMapper;
 
     public List<SrvOrgResponse> getOrgSrv(SrvOrgRequest srvOrgRequest){
-        List<SrvOrgResponse> list = new ArrayList<>();
-        Map<String,SrvOrgResponse> responseMap = new HashMap<>();
-        Map<String, SrvOrgDetail> responseDetMap = new HashMap<>();
-        String itemCodeReq = srvOrgRequest.getItemCode();
         String itemNameReq = ObjectUtil.isEmpty(srvOrgRequest.getItemName())?"":srvOrgRequest.getItemName() + "%";
-        Integer currentPageReq = ObjectUtil.isEmpty(srvOrgRequest.getCurrentPage())?0:srvOrgRequest.getCurrentPage();
-        Integer limitReq = ObjectUtil.isEmpty(srvOrgRequest.getLimit())?-1:srvOrgRequest.getLimit();
-        Integer beginNum = (currentPageReq == 1 || currentPageReq==0)?1:(currentPageReq - 1) * (limitReq + 1);
-        Integer endNum =  currentPageReq * limitReq;
-        List<Map<String,Object>> mapList = new ArrayList<>();
-        if (StringUtils.isNotEmpty(itemCodeReq)&&!"".equals(itemCodeReq)){
-            mapList = hiSrvOrgMapper.getBdSrvByCode(itemCodeReq,beginNum,endNum);
-        }else if (StringUtils.isNotEmpty(itemNameReq)&&!"".equals(itemNameReq)){
-            mapList = hiSrvOrgMapper.getBdSrvByName(itemNameReq,beginNum,endNum);
-        }else {
-            mapList = hiSrvOrgMapper.getBdSrvByCode("",beginNum,endNum);
-        }
-        if (mapList!=null){
-            for (Map<String,Object> map:mapList){
-                String item = map.get("ID_SRV").toString();
-                SrvOrgResponse srvOrgResponse = responseMap.get(item);
-                if (srvOrgResponse == null){
-                    srvOrgResponse = new SrvOrgResponse();
-                    srvOrgResponse.setItem(item);
-                    srvOrgResponse.setText(map.get("NA").toString());
-                    srvOrgResponse.setSrvOrgDetails(new ArrayList<>());
-                    list.add(srvOrgResponse);
-                    responseMap.put(item,srvOrgResponse);
-                }
-                List<Map<String,Object>> detailMap = hiSrvOrgMapper.getBdSrvDetail(item);
-                for (Map<String,Object> map1:detailMap){
-                    String itemCode = map1.get("ITEMCODE").toString();
-                    SrvOrgDetail srvOrgDetail = responseDetMap.get(itemCode);
-                    if (srvOrgDetail==null){
-                        srvOrgDetail = new SrvOrgDetail();
-                        srvOrgDetail.setItemCode(itemCode);
-                        srvOrgDetail.setItemName(map1.get("ITEMNAME").toString());
-                        srvOrgDetail.setNum(map1.get("NUM").toString());
-                        srvOrgDetail.setUnit(map1.get("UNIT").toString());
-                        srvOrgDetail.setPrice(map1.get("PRICE").toString());
-                        srvOrgResponse.getSrvOrgDetails().add(srvOrgDetail);
-                        responseDetMap.put(itemCode,srvOrgDetail);
-                    }
-                }
-            }
-        }
-        return list;
+        Integer currentPageReq = ObjectUtil.isEmpty(srvOrgRequest.getCurrentPage())?0:srvOrgRequest.getCurrentPage() ;
+        Integer limitReq = ObjectUtil.isEmpty(srvOrgRequest.getLimit())? -1:srvOrgRequest.getLimit();
+        List<SrvOrgResponse> mapList;
+        mapList = hiSrvOrgMapper.getBdSrv( srvOrgRequest.getItemCode(),
+                itemNameReq,
+                currentPageReq, limitReq);
+        return mapList;
     }
+
     @Autowired
     private HiSrvOrgMapperV2 hiSrvOrgMapperV2;
 
     public List<SrvOrgResponse> getOrgSrv2(SrvOrgRequest srvOrgRequest){
-        String itemCodeReq = srvOrgRequest.getItemCode();
+        //String itemCodeReq = srvOrgRequest.getItemCode();
         String itemNameReq = ObjectUtil.isEmpty(srvOrgRequest.getItemName())?"":srvOrgRequest.getItemName() + "%";
         Integer currentPageReq = ObjectUtil.isEmpty(srvOrgRequest.getCurrentPage())?0:srvOrgRequest.getCurrentPage();
         Integer limitReq = ObjectUtil.isEmpty(srvOrgRequest.getLimit())?-1:srvOrgRequest.getLimit();
         Integer beginNum = (currentPageReq == 1 || currentPageReq==0)?1:(currentPageReq - 1) * (limitReq + 1);
         Integer endNum =  currentPageReq * limitReq;
-        List<SrvOrgResponse> mapList = new ArrayList<>();
-        if (StringUtils.isNotEmpty(itemCodeReq)&&!"".equals(itemCodeReq)){
-            mapList = hiSrvOrgMapperV2.getBdSrvByCodeV2(itemCodeReq,beginNum,endNum);
-
-        }
+        List<SrvOrgResponse> mapList;
+        mapList = hiSrvOrgMapperV2.getBdSrvByCodeV2( srvOrgRequest.getItemCode(),
+                    itemNameReq,
+                    beginNum,endNum);
         return mapList;
     }
 }

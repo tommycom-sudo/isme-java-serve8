@@ -26,8 +26,18 @@
             FROM HI_BD_SRV_SET  x2, hi_bd_srv x3 ,HI_BD_SRVPRI x4
             WHERE x2.id_srv  = x3.id_srv  and x2.id_srv= x4.id_srv )
          x2 ON x1.ID_SRV  = x2.ID_SRV_SET
-        WHERE x1.cd = '101'  and x1.FG_ACTIVE = '1' and  (SD_SRVTP_CD LIKE '21%' OR SD_SRVTP_CD LIKE '22%')
-
+        WHERE  x1.FG_ACTIVE = '1' and  (SD_SRVTP_CD LIKE '21%' OR SD_SRVTP_CD LIKE '22%')
+        <choose>
+            <when test="itemCodeReq!=null and itemCodeReq!=''">
+                AND cd = #{itemCodeReq}
+            </when>
+            <when test="itemNameReq!=null and itemNameReq!=''">
+                and na like #{itemNameReq}
+            </when>
+        </choose>
+        <if test="endNum!='0' and beginNum &lt;= endNum">
+            and rownum between #{beginNum} and #{endNum}
+        </if>
     </select>
 
 

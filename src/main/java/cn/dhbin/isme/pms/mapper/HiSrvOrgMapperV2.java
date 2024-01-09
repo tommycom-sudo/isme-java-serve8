@@ -11,6 +11,8 @@ import java.util.Map;
 public interface HiSrvOrgMapperV2 {
 //    List<SrvOrgResponse> getSrvOrgByCode(SrvOrgRequest srvOrgRequest);
 
-    List<SrvOrgResponse> getBdSrvByCodeV2(@Param("itemCodeReq")String itemCodeReq, @Param("beginNum")Integer beginNum, @Param("endNum")Integer endNum);
+    List<SrvOrgResponse> getBdSrvByCodeV2(@Param("itemCodeReq")String itemCodeReq,
+                                          @Param("itemNameReq")String itemNameReq,
+                                          @Param("beginNum")Integer beginNum, @Param("endNum")Integer endNum);
 
 }
