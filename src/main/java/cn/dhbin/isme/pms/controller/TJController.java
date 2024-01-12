@@ -1,15 +1,14 @@
 package cn.dhbin.isme.pms.controller;
+import cn.dhbin.isme.common.response.Header;
+import cn.dhbin.isme.common.response.R;
+import cn.dhbin.isme.common.response.Request6;
 import cn.dhbin.isme.pms.mapper.HiSrvOrgMapper;
-import cn.dhbin.isme.pms.domain.dto.SrvOrgDetail;
 import cn.dhbin.isme.pms.domain.dto.SrvOrgResponse;
 import cn.dhbin.isme.pms.domain.request.SrvOrgRequest;
 import cn.dhbin.isme.pms.mapper.HiSrvOrgMapperV2;
 import cn.hutool.core.util.ObjectUtil;
 //import com.baomidou.mybatisplus.toolkit.StringUtils;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
@@ -17,10 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/tj")
@@ -29,10 +26,11 @@ import java.util.Map;
 public class TJController {
     @PostMapping("/getSrvDetail")
     @MetricTime("getSrvDetail1")
-    public List<SrvOrgResponse> getSrvDetail(@RequestBody @Validated SrvOrgRequest req){
-
-        return getOrgSrv(req);
-
+    public R<Header, Request6> getSrvDetail(@RequestBody @Validated SrvOrgRequest req){
+        Header h = new Header("200","成功");
+        Request6 res = new Request6();
+        res.setItem(getOrgSrv(req));
+        return R.ok(h, res);
     }
 
     @PostMapping("/getSrvDetailV2")

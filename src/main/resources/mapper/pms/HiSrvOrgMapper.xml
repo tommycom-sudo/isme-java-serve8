@@ -10,15 +10,17 @@
     </resultMap>
 
     <select id="getBdSrv" resultMap="getResult">
-        SELECT cd item , na text, id_srv FROM  hi_bd_srv
+        SELECT dic.na type, srv.cd item , srv.na text, srv.id_srv FROM  hi_bd_srv srv,V_ISYNC_DIC dic
         WHERE
-        fg_active = '1' AND (SD_SRVTP_CD LIKE '21%' OR SD_SRVTP_CD LIKE '22%')
+        srv.fg_active = '1' AND (srv.SD_SRVTP_CD LIKE '21%' OR srv.SD_SRVTP_CD LIKE '22%')
+        and srv.SD_SRVTP  = dic.ID_SD_ITEM
+
         <choose>
             <when test="itemCodeReq!=null and itemCodeReq!=''">
-                AND cd = #{itemCodeReq}
+                AND srv.cd = #{itemCodeReq}
             </when>
             <when test="itemNameReq!=null and itemNameReq!=''">
-                AND na like #{itemNameReq}
+                AND srv.na like #{itemNameReq}
             </when>
         </choose>
         <if test="endNum!='0' and beginNum &lt;= endNum">
@@ -31,6 +33,12 @@
                           FROM HI_BD_SRV_SET  x2, hi_bd_srv x3 ,HI_BD_SRVPRI x4
                           WHERE x2.id_srv  = x3.id_srv  and x2.id_srv= x4.id_srv
             and x2.id_srv_set = #{id_srv}
+        UNION all
+        SELECT  x3.ID_SRV ,X3.CD ItemCode, X3.NA ItemName, x4.pri Price,1,x3.UNIT_SRV_MED Unit
+        FROM  hi_bd_srv x3 ,HI_BD_SRVPRI x4
+        WHERE x3.id_srv = x4.id_srv
+        and x3.id_srv= #{id_srv} and x3.SD_SRVCOMBTP_CD = 1
     </select>
 
 </mapper>
+
