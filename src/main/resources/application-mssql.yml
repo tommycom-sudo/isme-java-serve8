@@ -1,6 +1,6 @@
 spring:
   datasource:
-    driver-class-name:
-    username: tao
-    password: 123456
-    url: jdbc:oracle:thin:@localhost:46333:XE
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: sa
+    password: 146-164-156-
+    url: jdbc:sqlserver://localhost:1433;database=javadb;;encrypt=false;
