@@ -13,15 +13,26 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.3.5.RELEASE</spring-boot.version>
+        <mapstruct-helper-starter.version>1.0.0</mapstruct-helper-starter.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.5.5</version>
-        </dependency>        <dependency>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.dhbin</groupId>
+            <artifactId>mapstruct-helper-starter</artifactId>
+            <version>${mapstruct-helper-starter.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>

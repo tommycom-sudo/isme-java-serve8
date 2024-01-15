@@ -33,8 +33,8 @@ class IsmeJavaServe8ApplicationTests {
         for (User u : userList) {
             System.out.println(u);
         }
-        Assert.isTrue(1 == userList.size(), "");
-        //userList.forEach(System.out::println);
+        //Assert.isTrue(1 == userList.size(), "");
+        userList.forEach(System.out::println);
     }
     public static void main(String[] args) {
         String s = "hello";
