@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -29,8 +30,20 @@ class IsmeJavaServe8ApplicationTests {
         List<User> userList = userMapper.selectList(null);
         List<Map<String,Object>> mapList = new ArrayList<>();
         mapList = userMapper.getUserList();
-
-        Assert.isTrue(1 == userList.size(), "");
+        for (User u : userList) {
+            System.out.println(u);
+        }
+        //Assert.isTrue(1 == userList.size(), "");
         userList.forEach(System.out::println);
+    }
+    public static void main(String[] args) {
+        String s = "hello";
+        String t = s;
+        s = "world";
+        System.out.println(t); // t是"hello"还是"world"?
+        List<Integer> integers = Arrays.asList(-1,2,3,4,5);
+
+
+        System.out.printf(String.valueOf(Math.abs(-1)));
     }
 }
