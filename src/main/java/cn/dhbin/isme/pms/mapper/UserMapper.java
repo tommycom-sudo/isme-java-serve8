@@ -10,6 +10,6 @@ import java.util.Map;
 public interface UserMapper extends BaseMapper<User> {
 
     //@Select("SELECT * FROM  hi_bd_srv")
-    List<Map<String,Object>> getUserList();
+    //List<Map<String,Object>> getUserList();
 
 }

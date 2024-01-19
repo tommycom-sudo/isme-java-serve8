@@ -24,14 +24,14 @@ import java.util.List;
 @RequiredArgsConstructor
 @Component
 public class TJController {
-    @PostMapping("/getSrvDetail")
-    @MetricTime("getSrvDetail1")
-    public R<Header, Request6> getSrvDetail(@RequestBody @Validated SrvOrgRequest req){
-        Header h = new Header("200","成功");
-        Request6 res = new Request6();
-        res.setItem(getOrgSrv(req));
-        return R.ok(h, res);
-    }
+//    @PostMapping("/getSrvDetail")
+//    @MetricTime("getSrvDetail1")
+//    public R<Header, Request6> getSrvDetail( @RequestBody @Validated SrvOrgRequest req){
+//        Header h = new Header("200","成功");
+//        Request6 res = new Request6();
+//        res.setItem(getOrgSrv(req));
+//        return R.ok(h, res);
+//    }
 
     @PostMapping("/getSrvDetailV2")
     @MetricTime("getSrvDetailv2")

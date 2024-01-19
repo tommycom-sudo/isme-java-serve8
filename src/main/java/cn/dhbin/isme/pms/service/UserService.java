@@ -38,7 +38,4 @@ public interface UserService extends IService<User> {
     //更新用户信息
     void updateProfile(Long id, UpdateProfileRequest request);
 
-
-
-
 }
