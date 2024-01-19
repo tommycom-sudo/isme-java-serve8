@@ -14,12 +14,13 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.3.5.RELEASE</spring-boot.version>
         <mapstruct-helper-starter.version>1.0.0</mapstruct-helper-starter.version>
+        <mybatis-plus.version>3.5.4.1</mybatis-plus.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.5.5</version>
+            <version>${mybatis-plus.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate.validator</groupId>

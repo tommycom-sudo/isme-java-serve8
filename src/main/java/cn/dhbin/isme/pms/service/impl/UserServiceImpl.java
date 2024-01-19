@@ -1,9 +1,9 @@
 package cn.dhbin.isme.pms.service.impl;
 
-import cn.dhbin.isme.demos.web.User;
 import cn.dhbin.isme.pms.domain.dto.LoginTokenDto;
 import cn.dhbin.isme.pms.domain.dto.UserDetailDto;
 import cn.dhbin.isme.pms.domain.dto.UserPageDto;
+import cn.dhbin.isme.pms.domain.entity.User;
 import cn.dhbin.isme.pms.domain.request.*;
 import cn.dhbin.isme.pms.mapper.UserMapper;
 import cn.dhbin.isme.pms.service.UserService;
