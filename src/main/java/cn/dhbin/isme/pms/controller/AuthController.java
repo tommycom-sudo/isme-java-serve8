@@ -21,6 +21,7 @@ import java.io.IOException;
 public class AuthController {
     private final CaptchaService captchaService;
     private static final String CAPTCHA_KEY = "captchaKey";
+
     @GetMapping("/captcha")
     public void captcha(HttpServletRequest request, HttpServletResponse response)
         throws IOException {
