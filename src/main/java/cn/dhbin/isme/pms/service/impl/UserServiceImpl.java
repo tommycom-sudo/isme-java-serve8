@@ -1,5 +1,7 @@
 package cn.dhbin.isme.pms.service.impl;
 
+import cn.dhbin.isme.common.exception.BizException;
+import cn.dhbin.isme.common.response.BizResponseCode;
 import cn.dhbin.isme.pms.domain.dto.LoginTokenDto;
 import cn.dhbin.isme.pms.domain.dto.UserDetailDto;
 import cn.dhbin.isme.pms.domain.dto.UserPageDto;
@@ -19,6 +21,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public LoginTokenDto login(LoginRequest request) {
+        User user = lambdaQuery().eq(User::getUsername, request.getUsername()).one();
+        if (user == null){
+            throw new BizException(BizResponseCode.ERR_10002);
+        }
+        // 预览环境下可快速登录，不用验证码
+        if (Boolean.True.equals)
         return null;
     }
 
