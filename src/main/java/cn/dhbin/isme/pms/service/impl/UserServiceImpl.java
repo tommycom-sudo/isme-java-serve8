@@ -47,7 +47,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (checkPw) {
             // 查询用户的角色
             List<Role> roles = roleService.findRolesByUserId(user.getId());
-            return generateToken(user, roles, roles.isEmpty() ? "" : roles.getFirst().getCode());
+            return generateToken(user, roles, roles.isEmpty() ? "" : roles.get(0).getCode());  //JDK21 . role.getFirst().getCode())
         } else {
             throw new BizException(BizResponseCode.ERR_10002);
         }
@@ -55,7 +55,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     private LoginTokenDto generateToken(User user, List<Role> roles, String currentRoleCode) {
         //密码验证成功
-        StpUtil
+        //StpUtil
+        return null;
     }
 
     @Override
