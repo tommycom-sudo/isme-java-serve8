@@ -15,6 +15,7 @@
         <spring-boot.version>2.3.5.RELEASE</spring-boot.version>
         <mapstruct-helper-starter.version>1.0.0</mapstruct-helper-starter.version>
         <mybatis-plus.version>3.5.4.1</mybatis-plus.version>
+        <sa-token.version>1.37.0</sa-token.version>
     </properties>
     <dependencies>
         <dependency>
@@ -43,9 +44,17 @@
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
             <version>1.9.7</version>
-
         </dependency>
-
+        <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-spring-boot3-starter</artifactId>
+            <version>${sa-token.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-jwt</artifactId>
+            <version>${sa-token.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.oracle.database.jdbc</groupId>
             <artifactId>ojdbc8</artifactId>

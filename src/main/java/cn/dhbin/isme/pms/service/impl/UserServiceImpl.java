@@ -1,5 +1,8 @@
 package cn.dhbin.isme.pms.service.impl;
 
+import cn.dev33.satoken.stp.SaLoginConfig;
+import cn.dev33.satoken.stp.SaTokenInfo;
+import cn.dhbin.isme.common.auth.SaTokenConfigure;
 import cn.dhbin.isme.common.exception.BizException;
 import cn.dhbin.isme.common.response.BizResponseCode;
 import cn.dhbin.isme.pms.domain.dto.LoginTokenDto;
@@ -18,7 +21,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
+import cn.dev33.satoken.stp.StpUtil;
 import java.util.List;
 
 @Service
@@ -55,8 +58,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     private LoginTokenDto generateToken(User user, List<Role> roles, String currentRoleCode) {
         //密码验证成功
-        //StpUtil
-        return null;
+        StpUtil.login(user.getId(),
+                SaLoginConfig.setExtra(SaTokenConfigure.JWT_USER_ID_KEY, user.getId())
+                        .setExtra(SaTokenConfigure.JWT_USERNAME_KEY, user.getUsername())
+                        .setExtra(SaTokenConfigure.JWT_CURRENT_ROLE_KEY, currentRoleCode)
+                        .setExtra(SaTokenConfigure.JWT_ROLE_LIST_KEY, roles));
+        SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
+        LoginTokenDto dto = new LoginTokenDto();
+        dto.setAccessToken(tokenInfo.getTokenValue());
+        return dto;
     }
 
     @Override
