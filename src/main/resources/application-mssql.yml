@@ -2,5 +2,6 @@ spring:
   datasource:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     username: sa
-    password: 146-164-156-
-    url: jdbc:sqlserver://localhost:1433;database=javadb;;encrypt=false;
+    password: 123
+    # r9000 SQL2016端口7567 ,密码123； zenbook 1433 sql2008r2 sp3 密码146-164-156-;
+    url: jdbc:sqlserver://localhost:7567;database=javadb;encrypt=false;

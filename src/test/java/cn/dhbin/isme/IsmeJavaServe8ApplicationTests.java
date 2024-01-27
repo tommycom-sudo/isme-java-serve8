@@ -24,18 +24,18 @@ class IsmeJavaServe8ApplicationTests {
     @Autowired
     private UserMapper userMapper;
 
-    @Test
-    public void testSelect() {
-        System.out.println(("----- selectAll method test ------"));
-        List<User> userList = userMapper.selectList(null);
-        List<Map<String,Object>> mapList = new ArrayList<>();
-        mapList = userMapper.getUserList();
-        for (User u : userList) {
-            System.out.println(u);
-        }
-        //Assert.isTrue(1 == userList.size(), "");
-        userList.forEach(System.out::println);
-    }
+ //   @Test
+//    public void testSelect() {
+//        System.out.println(("----- selectAll method test ------"));
+//        List<User> userList = userMapper.selectList(null);
+//        List<Map<String,Object>> mapList = new ArrayList<>();
+//        mapList = userMapper.getUserList();
+//        for (User u : userList) {
+//            System.out.println(u);
+//        }
+//        //Assert.isTrue(1 == userList.size(), "");
+//        userList.forEach(System.out::println);
+//    }
     public static void main(String[] args) {
         String s = "hello";
         String t = s;

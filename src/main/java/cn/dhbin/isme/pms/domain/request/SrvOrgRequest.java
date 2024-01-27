@@ -1,8 +1,10 @@
 package cn.dhbin.isme.pms.domain.request;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
 
-@Data
+@Data   //. PropertyNamingStrategyBase，KebabCaseStrategy, LowerCaseStrategy(全小写), SnakeCaseStrategy??
 public class SrvOrgRequest {
     //服务项目编码
     private String itemCode;
@@ -15,4 +17,6 @@ public class SrvOrgRequest {
 
     //每页返回记录条数
     private Integer limit;
+
+    private String idTet;
 }

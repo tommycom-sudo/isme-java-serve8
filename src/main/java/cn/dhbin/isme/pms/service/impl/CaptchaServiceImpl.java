@@ -25,4 +25,14 @@ public class CaptchaServiceImpl implements CaptchaService {
         captchaList.put(key, captcha);
         return Pair.of(key, captcha);
     }
+
+    @Override
+    public boolean verify(String key, String code) {
+        ICaptcha captcha = captchaList.get(key);
+        if (captcha == null) {
+            return false;
+        }
+        captchaList.remove(key);
+        return captcha.verify(code);
+    }
 }

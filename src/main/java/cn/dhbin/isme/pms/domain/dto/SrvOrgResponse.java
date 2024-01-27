@@ -8,6 +8,7 @@ import java.util.List;
 @Data
 public class SrvOrgResponse {
     //服务项目编码
+
     private String item;
     //服务项目名称
     private String text;

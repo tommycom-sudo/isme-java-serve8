@@ -8,4 +8,6 @@ public interface CaptchaService {
 
     //创建验证码
     Pair<String, ICaptcha> create();
+
+    boolean verify(String key , String code);
 }
