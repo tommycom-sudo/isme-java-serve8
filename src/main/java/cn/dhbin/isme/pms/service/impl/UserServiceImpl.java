@@ -2,6 +2,7 @@ package cn.dhbin.isme.pms.service.impl;
 
 import cn.dev33.satoken.stp.SaLoginConfig;
 import cn.dev33.satoken.stp.SaTokenInfo;
+import cn.dev33.satoken.stp.StpUtil;
 import cn.dhbin.isme.common.auth.SaTokenConfigure;
 import cn.dhbin.isme.common.exception.BizException;
 import cn.dhbin.isme.common.response.BizResponseCode;
@@ -21,7 +22,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import cn.dev33.satoken.stp.StpUtil;
+
 import java.util.List;
 
 @Service
