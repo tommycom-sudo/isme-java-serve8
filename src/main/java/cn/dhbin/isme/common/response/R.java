@@ -1,6 +1,5 @@
 package cn.dhbin.isme.common.response;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
