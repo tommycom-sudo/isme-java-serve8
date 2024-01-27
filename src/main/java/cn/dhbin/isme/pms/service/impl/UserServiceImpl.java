@@ -27,6 +27,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
+
     private final CaptchaService captchaService;
 
     private final RoleService roleService;

@@ -40,7 +40,7 @@ public class AuthController {
         HttpSession session = httpServletRequest.getSession();
         String captchaKey = (String) session.getAttribute(CAPTCHA_KEY);
         if (captchaKey != null){
-            request.setCaptcha(captchaKey);
+            request.setCaptchaKey(captchaKey);
         }
         LoginTokenDto tokenDto = userService.login(request);
         return R.ok(tokenDto);
