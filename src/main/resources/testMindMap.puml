@@ -4,16 +4,25 @@
 caption figure 1
 title My super title
 
-* <&flag>Debian
-** <&globe>Ubuntu
+* <&flag>application
+** ContentCache
+** DefaultConfig
 *** Linux Mint
 *** Kubuntu
 *** Lubuntu
 *** KDE Neon
-** <&graph>LMDE
-** <&pulse>SolydXK
-** <&people>SteamOS
-** <&star>Raspbian with a very long name
+** DictItemInitCache
+** GroupInitCache
+** JobBase
+** JobAutoOld2NewProcessor
+** JobFailedNew2OldProcessor
+** JobFailedOld2NewProcessor
+** jobFailedAutoOld2NewProcessor
+** JobNew2OldProcessor
+** jobOld2NewProcessor
+** RecordMapInitCache
+** SmSaapServiceImpl
+
 *** <s>Raspmbc</s> => OSMC
 *** <s>Raspyfi</s> => Volumio
 
