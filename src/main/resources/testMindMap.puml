@@ -2,20 +2,53 @@
 'https://plantuml.com/mindmap-diagram
 
 caption figure 1
-title My super title
+title 启动相关任务清单
 
 * <&flag>application
 ** ContentCache
+***:<code>
+GlobalEventExecFactory
+   implements
+Thread.UncaughtExceptionHandler
+</code>
+;
 ** DefaultConfig
-*** Linux Mint
-*** Kubuntu
-*** Lubuntu
-*** KDE Neon
+*** isync_config表的租户都不对，似乎没用
 ** DictItemInitCache
+*** 从isync.ISYNC_DIC_MAP_ITEM构建缓存
 ** GroupInitCache
+***:<code>
+  executeGroupCache(ServiceConstant.HIS)
+  executeGroupCache(ServiceConstant.WHIS)
+</code>;
 ** JobBase
+***:<code>
+//a、b环境
+Object o = redisOperation.get(RedisKey.getEnvironment())
+if (o==null || o.toString().isEmpty()){
+    redisOperation.set(RedisKey.getEnvironment(), ServiceConstant.ENVIRONMENT_A)
+}
+</code>
+;
 ** JobAutoOld2NewProcessor
+***:<code>
+ if (isUseCluster){
+    return
+}
+old2newExecutor.schedule(() -> this.asyncProcess(),
+    triggerContext -> new CronTrigger("0/20 * * * * ?").nextExecutionTime(triggerContext))
+
+;
 ** JobFailedNew2OldProcessor
+***:<code>
+public void process(){
+        if (isUseCluster){
+            return
+        }
+        new2oldExecutor.schedule(() -> this.asyncProcess(),
+                triggerContext -> new CronTrigger("0/5 * * * * ?").nextExecutionTime(triggerContext))
+    }
+</code>;
 ** JobFailedOld2NewProcessor
 ** jobFailedAutoOld2NewProcessor
 ** JobNew2OldProcessor

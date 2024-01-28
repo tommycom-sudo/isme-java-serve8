@@ -25,7 +25,6 @@ public class AuthController {
     private final UserService userService;
     private static final String CAPTCHA_KEY = "captchaKey";
 
-
     @GetMapping("/captcha")
     public void captcha(HttpServletRequest request, HttpServletResponse response)
         throws IOException {
