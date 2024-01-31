@@ -39,6 +39,10 @@ old2newExecutor.schedule(() -> this.asyncProcess(),
     triggerContext -> new CronTrigger("0/20 * * * * ?").nextExecutionTime(triggerContext))
 
 ;
+** jobFailedAutoOld2NewProcessor
+** jobOld2NewProcessor
+** JobFailedOld2NewProcessor
+** JobNew2OldProcessor
 ** JobFailedNew2OldProcessor
 ***:<code>
 public void process(){
@@ -49,10 +53,8 @@ public void process(){
                 triggerContext -> new CronTrigger("0/5 * * * * ?").nextExecutionTime(triggerContext))
     }
 </code>;
-** JobFailedOld2NewProcessor
-** jobFailedAutoOld2NewProcessor
-** JobNew2OldProcessor
-** jobOld2NewProcessor
+
+
 ** RecordMapInitCache
 ** SmSaapServiceImpl
 
