@@ -5,6 +5,8 @@ caption figure 1
 title 启动相关任务清单
 
 * <&flag>application
+** DefaultConfig
+*** isync_config表的租户都不对，似乎没用
 ** ContentCache
 ***:<code>
 GlobalEventExecFactory
@@ -12,8 +14,7 @@ GlobalEventExecFactory
 Thread.UncaughtExceptionHandler
 </code>
 ;
-** DefaultConfig
-*** isync_config表的租户都不对，似乎没用
+
 ** DictItemInitCache
 *** 从isync.ISYNC_DIC_MAP_ITEM构建缓存
 ** GroupInitCache
@@ -21,6 +22,7 @@ Thread.UncaughtExceptionHandler
   executeGroupCache(ServiceConstant.HIS)
   executeGroupCache(ServiceConstant.WHIS)
 </code>;
+** RecordMapInitCache
 ** JobBase
 ***:<code>
 //a、b环境
@@ -30,7 +32,7 @@ if (o==null || o.toString().isEmpty()){
 }
 </code>
 ;
-** JobAutoOld2NewProcessor
+** 6.JobAutoOld2NewProcessor
 ***:<code>
  if (isUseCluster){
     return
@@ -39,7 +41,8 @@ old2newExecutor.schedule(() -> this.asyncProcess(),
     triggerContext -> new CronTrigger("0/20 * * * * ?").nextExecutionTime(triggerContext))
 
 ;
-** JobFailedNew2OldProcessor
+** 6.jobFailedAutoOld2NewProcessor
+** 7.JobFailedNew2OldProcessor
 ***:<code>
 public void process(){
         if (isUseCluster){
@@ -49,11 +52,11 @@ public void process(){
                 triggerContext -> new CronTrigger("0/5 * * * * ?").nextExecutionTime(triggerContext))
     }
 </code>;
-** JobFailedOld2NewProcessor
-** jobFailedAutoOld2NewProcessor
-** JobNew2OldProcessor
-** jobOld2NewProcessor
-** RecordMapInitCache
+** 8.JobFailedOld2NewProcessor
+
+** 9.JobNew2OldProcessor
+** 10.jobOld2NewProcessor
+
 ** SmSaapServiceImpl
 
 *** <s>Raspmbc</s> => OSMC
